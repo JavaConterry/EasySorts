@@ -40,7 +40,7 @@ public class Time {
         int n = timeList.size()-1;
         for(int i = 0; i < n; i++){
             for(int j = 0; j < n; j++){
-                if(timeList.get(j).biggerOrEqualThan(timeList.get(j+1))){
+                if(timeList.get(j).IsBiggerOrEqualThan(timeList.get(j+1))){
                     var temp = timeList.get(j);
                     timeList.set(j, timeList.get(j+1));
                     timeList.set(j+1, temp);
@@ -50,11 +50,11 @@ public class Time {
         return timeList;
     }
 
-    private boolean biggerOrEqualThan(Time anotherTime){
-        if(this.hours >= anotherTime.hours){
+    public boolean IsBiggerOrEqualThan(Time anotherTime){
+        if(this.hours > anotherTime.hours){
             return true;
         }
-        else if(this.hours == anotherTime.hours && this.minutes >= anotherTime.minutes){
+        else if(this.hours == anotherTime.hours && this.minutes > anotherTime.minutes){
             return true;
         }
         else if(this.hours == anotherTime.hours && this.minutes == anotherTime.minutes && this.seconds >= anotherTime.seconds){
@@ -67,7 +67,19 @@ public class Time {
 
     @Override
     public String toString(){
-        String result = this.hours + " " + this.minutes + " " + this.seconds;
+        String sSeconds;
+        String sMinutes;
+
+        sMinutes = String.format("%02d", this.minutes);
+
+        if(this.seconds<10 && this.seconds!=0) {
+            sSeconds = String.format("%02d", this.seconds);
+        }
+        else {
+            sSeconds = Integer.toString(this.seconds);
+        }
+
+        String result = this.hours + " " + sMinutes + " " + sSeconds;
         return result;
     }
 }
